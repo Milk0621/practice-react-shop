@@ -27,7 +27,7 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route path="/" element={ <Main shoes={shoes} /> } />
+        <Route path="/" element={ <Main shoes={shoes} setShoes={setShoes} /> } />
 
         <Route path="/detail/:id" element={ <Detail shoes={shoes}/> } />
         
