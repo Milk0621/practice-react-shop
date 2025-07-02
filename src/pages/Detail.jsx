@@ -29,7 +29,6 @@ function Detail( props ) {
     //  }
     // }, [])
     
-    let [count, setCount] = useState(0);
     let [showAlert, setShowAlert] = useState(true);
 
     let {id} = useParams();

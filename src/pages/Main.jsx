@@ -3,7 +3,30 @@ import axios from 'axios';
 import { useState } from 'react';
 
 function Main({ shoes, setShoes }) {
-  
+  let [clickCount, setClickCount] = useState(0);
+  let [loading, setLoading] = useState(false);
+  let [noMore, setNoMore] = useState(false);
+
+  let handleLoadMore = () => {
+    setLoading(true);
+
+    let nextPage = clickCount + 2; // 처음은 data2.json, 그다음 data3.json
+    let url = `https://codingapple1.github.io/shop/data${nextPage}.json`;
+
+    axios.get(url)
+    .then((result)=>{
+      let copy = [...shoes, ...result.data];
+      setShoes(copy);
+      setClickCount(clickCount + 1);
+      setLoading(false);
+    })
+    .catch(()=>{
+      console.log('실패');
+      setNoMore(true);
+      setLoading(false);
+    })
+  }
+
   return (
     <>
       <div className="main-bg"></div>
@@ -18,16 +41,10 @@ function Main({ shoes, setShoes }) {
           ))}
         </div>
       </div>
-      <button onClick={()=>{
-        axios.get('https://codingapple1.github.io/shop/data2.json')
-        .then((result)=>{
-          let copy = [...shoes, ...result.data];
-          setShoes(copy);
-        })
-        .catch(()=>{
-          console.log('실패');
-        })
-      }}>버튼</button>
+      
+      {loading && <p className='text-center mt-3'>로딩중입니다..</p>}
+      {!noMore && <button onClick={ handleLoadMore }>더보기</button>}
+      {noMore && <p className='text-center mt-3'>더이상 상품이 존재하지 않습니다.</p>}
     </>
   );
 }
