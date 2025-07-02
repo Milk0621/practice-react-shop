@@ -10,7 +10,6 @@ function App() {
 
   return (
     <div className="App">
-      {data.a}
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
@@ -27,7 +26,7 @@ function App() {
         <Row>
           { shoes.map((shoe, i)=>{
               return(
-                <Product shoes={shoes[i]} src={'https://codingapple1.github.io/shop/shoes'+(i+1)+'.jpg'}></Product>
+                <Product key={shoe.id} shoe={shoe} src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`}></Product>
               )
             }) 
           }
@@ -42,8 +41,8 @@ function Product(props){
   return(
     <Col>
       <img src={props.src} width='80%'/>
-      <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.price}</p>
+      <h4>{props.shoe.title}</h4>
+      <p>{props.shoe.price}</p>
     </Col>
   )
 }
