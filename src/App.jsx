@@ -2,6 +2,9 @@ import {Button, Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import './App.css';
 import { useState } from 'react';
 import data from './data.js';
+import { Routes, Route, Link } from 'react-router-dom'
+import Main from './Main.jsx';
+import Detail from './Detail.jsx';
 
 
 function App() {
@@ -10,6 +13,8 @@ function App() {
 
   return (
     <div className="App">
+
+
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
@@ -20,18 +25,11 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className='main-bg'></div>
-
-      <Container fluid>
-        <Row>
-          { shoes.map((shoe, i)=>{
-              return(
-                <Product key={shoe.id} shoe={shoe} src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`}></Product>
-              )
-            }) 
-          }
-        </Row>
-      </Container>
+      <Routes>
+        <Route path="/" element={ <Main shoes={shoes} /> } />
+        <Route path="/detail" element={ <Detail /> } />
+      </Routes>
+    
 
     </div>
   );
