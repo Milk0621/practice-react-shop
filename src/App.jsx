@@ -2,14 +2,15 @@ import {Button, Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import './App.css';
 import { useState } from 'react';
 import data from './data.js';
-import { Routes, Route, Link } from 'react-router-dom'
-import Main from './Main.jsx';
-import Detail from './Detail.jsx';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import Main from './pages/Main.jsx';
+import Detail from './pages/Detail.jsx';
 
 
 function App() {
 
   let [shoes, setShoes] = useState(data);
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -19,15 +20,28 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#cart">Cart</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
       <Routes>
         <Route path="/" element={ <Main shoes={shoes} /> } />
-        <Route path="/detail" element={ <Detail /> } />
+
+        <Route path="/detail" element={ <Detail shoes={shoes}/> } />
+        
+        <Route path="/about" element={ <About /> }>
+          <Route path="member" element={ <div>멤버임</div> } />
+          <Route path="location" element={ <div>위치정보임</div> } />
+        </Route>
+        
+        <Route path="/event" element={ <Event /> }>
+          <Route path="one" element={ <div>첫 주문시 양배추즙 서비스</div> } />
+          <Route path="two" element={ <div>생일기념 쿠폰받기</div> } />
+        </Route>
+        
+        <Route path="*" element={ <div>없는 페이지입니다.</div> } />
       </Routes>
     
 
@@ -35,13 +49,21 @@ function App() {
   );
 }
 
-function Product(props){
+function About(){
+    return(
+      <div>
+        <h4>회사정보임</h4>
+        <Outlet></Outlet>
+      </div>
+    )
+}
+
+function Event(){
   return(
-    <Col>
-      <img src={props.src} width='80%'/>
-      <h4>{props.shoe.title}</h4>
-      <p>{props.shoe.price}</p>
-    </Col>
+    <div>
+      <h4>오늘의 이벤트</h4>
+      <Outlet></Outlet>
+    </div>
   )
 }
 
