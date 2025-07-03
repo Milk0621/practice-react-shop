@@ -5,6 +5,7 @@ import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.jsx';
 import Detail from './pages/Detail.jsx';
+import Cart from './pages/Cart.jsx';
 
 export let Context1 = createContext()
 
@@ -48,6 +49,8 @@ function App() {
           <Route path="two" element={ <div>생일기념 쿠폰받기</div> } />
         </Route>
         
+        <Route path="/cart" element={ <Cart /> }></Route>
+
         <Route path="*" element={ <div>없는 페이지입니다.</div> } />
       </Routes>
     
