@@ -1,10 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Nav } from 'react-bootstrap';
 
+import {Context1} from './../App.jsx';
 
 function Detail( props ) {
+    
+    let {inventory} = useContext(Context1);
+
+    let [fade, setFade] = useState('');
+    let [showAlert, setShowAlert] = useState(true);
+    
+    let {id} = useParams();
+    let shoe = props.shoes.find((x)=> x.id == id)
+    
+    let [tab, setTab] = useState(0);
+
     useEffect(()=>{
         let a = setTimeout(()=>{ setFade('end') }, 100);
         return ()=>{
@@ -35,14 +47,6 @@ function Detail( props ) {
     //       4. useEffect 실행 전에 뭔가 실행하려면 언제나 return ()=>{}
     //  }
     // }, [])
-    let [fade, setFade] = useState('');
-
-    let [showAlert, setShowAlert] = useState(true);
-
-    let {id} = useParams();
-    let shoe = props.shoes.find((x)=> x.id == id)
-
-    let [tab, setTab] = useState(0);
 
     return(
         <div className={"container start " + fade}>
@@ -84,7 +88,7 @@ function Detail( props ) {
     )
 }
 function TabContent({tab}){
-
+    let {inventory} = useContext(Context1);
     let [fade, setFade] = useState('');
 
     useEffect(()=>{
@@ -97,7 +101,7 @@ function TabContent({tab}){
     
     return (
         <div className={"start " + fade}>
-            {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+            {[<div>{inventory}</div>, <div>내용1</div>, <div>내용2</div>][tab]}
         </div>
     )
         
