@@ -12,7 +12,12 @@ let cart = createSlice({
             item.count += 1;
         },
         addCart(state, action){
-            state.push(action.payload)
+            let result = state.find((x)=> x.id == action.payload.id)
+            if (result) {
+                result.count += 1;
+            } else {
+                state.push(action.payload);
+            }
         },
         deleteCart(state, action){
             let index = state.findIndex((x)=> x.id == action.payload)
