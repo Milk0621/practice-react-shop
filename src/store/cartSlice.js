@@ -13,9 +13,13 @@ let cart = createSlice({
         },
         addCart(state, action){
             state.push(action.payload)
+        },
+        deleteCart(state, action){
+            let index = state.findIndex((x)=> x.id == action.payload)
+            state.splice(index, 1)
         }
     }
 })
-export let {addCount, addCart} = cart.actions
+export let {addCount, addCart, deleteCart} = cart.actions
 
 export default cart
