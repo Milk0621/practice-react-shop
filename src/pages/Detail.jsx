@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Nav } from 'react-bootstrap';
+import { addCart } from "./../store/cartSlice";
 
 import {Context1} from './../App.jsx';
+import { useDispatch, useSelector } from "react-redux";
 
 function Detail( props ) {
-    
-    let {inventory} = useContext(Context1);
+
+    let state = useSelector((state)=> state)
+    let dispatch = useDispatch();
 
     let [fade, setFade] = useState('');
     let [showAlert, setShowAlert] = useState(true);
@@ -66,7 +69,9 @@ function Detail( props ) {
                     <h4 className="pt-5">{shoe.title}</h4>
                     <p>{shoe.content}</p>
                     <p>{shoe.price}</p>
-                    <button className="btn btn-danger">주문하기</button> 
+                    <button className="btn btn-danger" onClick={()=>{
+                        dispatch(addCart({id : shoe.id, name : shoe.title, count : 1}))
+                    }}>주문하기</button> 
                 </div>
             </div>
 
