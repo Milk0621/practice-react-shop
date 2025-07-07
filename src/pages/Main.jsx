@@ -1,6 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Main({ shoes, setShoes }) {
   let [clickCount, setClickCount] = useState(0);
@@ -50,8 +51,10 @@ function Main({ shoes, setShoes }) {
 }
 
 function Product(props) {
+  let navigate = useNavigate();
+
   return (
-    <div className="col-md-4">
+    <div className="col-md-4" style={{cursor : 'pointer'}} onClick={()=>navigate(`/detail/${props.shoe.id}`)}>
       <img src={props.src} width="80%" />
       <h4>{props.shoe.title}</h4>
       <p>{props.shoe.price}</p>
