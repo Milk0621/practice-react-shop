@@ -1,13 +1,16 @@
 import {Button, Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, Suspense, lazy, useEffect, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.jsx';
-import Detail from './pages/Detail.jsx';
-import Cart from './pages/Cart.jsx';
+// import Detail from './pages/Detail.jsx';
+// import Cart from './pages/Cart.jsx';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+
+const Detail = lazy(()=> import('./pages/Detail.jsx'))
+const Cart = lazy(()=> import('./pages/Cart.jsx'))
 
 export let Context1 = createContext()
 
@@ -55,9 +58,11 @@ function App() {
         <Route path="/" element={ <Main shoes={shoes} setShoes={setShoes} /> } />
 
         <Route path="/detail/:id" element={ 
-          <Context1.Provider value={ {inventory} }>
-            <Detail shoes={shoes} />
-          </Context1.Provider>
+          <Suspense fallback={<div>페이지 로딩중..</div>}>
+            <Context1.Provider value={ {inventory} }>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          </Suspense>
         } />
         
         <Route path="/about" element={ <About /> }>
@@ -70,7 +75,11 @@ function App() {
           <Route path="two" element={ <div>생일기념 쿠폰받기</div> } />
         </Route>
         
-        <Route path="/cart" element={ <Cart /> }></Route>
+        <Route path="/cart" element={ 
+          <Suspense fallback={<div>페이지 로딩중..</div>}>
+            <Cart />
+          </Suspense>
+        }></Route>
 
         <Route path="*" element={ <div>없는 페이지입니다.</div> } />
       </Routes>
