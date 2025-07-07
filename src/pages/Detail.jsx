@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { Nav } from 'react-bootstrap';
 import { addCart } from "./../store/cartSlice";
 
@@ -8,14 +7,15 @@ import {Context1} from './../App.jsx';
 import { useDispatch, useSelector } from "react-redux";
 
 import {useLike} from './../hooks/like.js' 
+import {useUsername} from './../hooks/user.js'
+
 
 function Detail( props ) {
 
-    let [like,addLike] = useLike()
-
+    
     let state = useSelector((state)=> state)
     let dispatch = useDispatch();
-
+    
     let [fade, setFade] = useState('');
     let [showAlert, setShowAlert] = useState(true);
     
@@ -23,7 +23,7 @@ function Detail( props ) {
     let shoe = props.shoes.find((x)=> x.id == id)
     
     let [tab, setTab] = useState(0);
-
+    
     useEffect(()=>{
         let a = setTimeout(()=>{ setFade('end') }, 100);
         return ()=>{
@@ -31,7 +31,7 @@ function Detail( props ) {
             setFade('');
         }
     }, [])
-
+    
     useEffect(()=>{
         let a = setTimeout(()=>{ setShowAlert(false); }, 2000);
         return ()=>{
@@ -45,7 +45,7 @@ function Detail( props ) {
             alert("경고! 숫자만 입력하세요.");
         }
     }, [text])
-
+    
     useEffect(()=>{
         let watched = localStorage.getItem('watched')
         watched = JSON.parse(watched)
@@ -54,16 +54,17 @@ function Detail( props ) {
         watched = Array.from(watched) //Set -> 배열로 다시 변환
         localStorage.setItem('watched', JSON.stringify(watched))
     }, [])
-
+    
     // useEffect(()=>{  }) 1. 재렌더링마다 코드 실행 
     // useEffect(()=>{  }, []) 2. mount시 1회 코드 실행 / 5. 특정 state 변경시에만 실행하려면 [state명]
     // useEffect(()=>{  
-    //  return ()=>{
-    //       3. unmount시 1회 코드 실행 
-    //       4. useEffect 실행 전에 뭔가 실행하려면 언제나 return ()=>{}
-    //  }
-    // }, [])
-
+        //  return ()=>{
+            //       3. unmount시 1회 코드 실행 
+            //       4. useEffect 실행 전에 뭔가 실행하려면 언제나 return ()=>{}
+                //  }
+                // }, [])
+    let [like,addLike] = useLike();
+    let username = useUsername();
     return(
         <div className={"container start " + fade}>
             {
@@ -72,6 +73,7 @@ function Detail( props ) {
                         2초이내 구매시 할인
                     </div>
             }
+            <span>{username}</span>
             <div className="row">
                 <div className="col-md-6">
                     <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
