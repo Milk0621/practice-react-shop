@@ -54,37 +54,31 @@ function App() {
         </Container>
       </Navbar>
 
-      <Routes>
-        <Route path="/" element={ <Main shoes={shoes} setShoes={setShoes} /> } />
+      <Suspense fallback={<div>페이지 로딩중..</div>}>
+        <Routes>
+          <Route path="/" element={ <Main shoes={shoes} setShoes={setShoes} /> } />
 
-        <Route path="/detail/:id" element={ 
-          <Suspense fallback={<div>페이지 로딩중..</div>}>
-            <Context1.Provider value={ {inventory} }>
-              <Detail shoes={shoes} />
-            </Context1.Provider>
-          </Suspense>
-        } />
-        
-        <Route path="/about" element={ <About /> }>
-          <Route path="member" element={ <div>멤버임</div> } />
-          <Route path="location" element={ <div>위치정보임</div> } />
-        </Route>
-        
-        <Route path="/event" element={ <Event /> }>
-          <Route path="one" element={ <div>첫 주문시 양배추즙 서비스</div> } />
-          <Route path="two" element={ <div>생일기념 쿠폰받기</div> } />
-        </Route>
-        
-        <Route path="/cart" element={ 
-          <Suspense fallback={<div>페이지 로딩중..</div>}>
-            <Cart />
-          </Suspense>
-        }></Route>
-
-        <Route path="*" element={ <div>없는 페이지입니다.</div> } />
-      </Routes>
+          <Route path="/detail/:id" element={ 
+              <Context1.Provider value={ {inventory} }>
+                <Detail shoes={shoes} />
+              </Context1.Provider>
+          } />
     
+          <Route path="/about" element={ <About /> }>
+            <Route path="member" element={ <div>멤버임</div> } />
+            <Route path="location" element={ <div>위치정보임</div> } />
+          </Route>
+          
+          <Route path="/event" element={ <Event /> }>
+            <Route path="one" element={ <div>첫 주문시 양배추즙 서비스</div> } />
+            <Route path="two" element={ <div>생일기념 쿠폰받기</div> } />
+          </Route>
+          
+          <Route path="/cart" element={ <Cart /> }></Route>
 
+          <Route path="*" element={ <div>없는 페이지입니다.</div> } />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
