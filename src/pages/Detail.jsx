@@ -42,6 +42,15 @@ function Detail( props ) {
         }
     }, [text])
 
+    useEffect(()=>{
+        let watched = localStorage.getItem('watched')
+        watched = JSON.parse(watched)
+        watched.push(shoe.id)
+        watched = new Set(watched) //중복 제거용 Set 객체 생성
+        watched = Array.from(watched) //Set -> 배열로 다시 변환
+        localStorage.setItem('watched', JSON.stringify(watched))
+    }, [])
+
     // useEffect(()=>{  }) 1. 재렌더링마다 코드 실행 
     // useEffect(()=>{  }, []) 2. mount시 1회 코드 실행 / 5. 특정 state 변경시에만 실행하려면 [state명]
     // useEffect(()=>{  

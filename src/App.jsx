@@ -1,6 +1,6 @@
 import {Button, Navbar, Container, Nav, Row, Col} from 'react-bootstrap';
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.jsx';
@@ -11,10 +11,9 @@ export let Context1 = createContext()
 
 function App() {
 
-  let obj = {name : 'kim'}
-  localStorage.setItem('data', JSON.stringify(obj)) //Object -> JSON 변환
-  let a = localStorage.getItem('data')
-  console.log(JSON.parse(a)) //JSON -> Object 변환
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify( [] ))
+  }, [])
 
   let [shoes, setShoes] = useState(data);
   let [inventory, setInventory] = useState([10, 11, 12]);
