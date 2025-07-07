@@ -1,66 +1,35 @@
-# Getting Started with Create React App
+# React Shop Practice
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 React와 Redux Toolkit을 활용하여 **간단한 쇼핑몰 기능을 직접 구현**해보며, React의 핵심 개념과 상태 관리 흐름을 학습하기 위해 진행한 실습 프로젝트입니다.
 
-## Available Scripts
+주요 목표는 단순한 UI 구현을 넘어서, **사용자 인터랙션과 상태 변경 흐름**을 실제로 설계하고 직접 조작해보는 경험을 통해 React의 작동 원리를 체득하는 것이었습니다.
 
-In the project directory, you can run:
+상품을 장바구니에 담고, 수량을 변경하거나 삭제하는 기능 등 실제 쇼핑몰에서 자주 볼 수 있는 사용자 시나리오를 구성해보며 **컴포넌트 분리, 상태 공유, 액션 처리**에 대한 감각을 익혔습니다.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 💡 이 프로젝트에서 학습한 것
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 컴포넌트 구조 설계 및 JSX 문법
+- `useState`, `useEffect`를 활용한 상태 관리 및 라이프사이클 이해
+- Redux Toolkit을 이용한 글로벌 상태 관리
+- `useSelector`, `useDispatch`를 통한 전역 상태 접근 및 수정
+- 장바구니에 상품 추가 / 중복 시 수량 증가 / 삭제 기능 구현
+- 조건부 렌더링 및 리스트 렌더링 (`map`)
+- React Router를 이용한 라우팅 처리
+- React-Bootstrap을 이용한 테이블 및 버튼 스타일링
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠 사용 기술 스택
 
-### `npm run build`
+- **React**
+- **Redux Toolkit**
+- **JavaScript (ES6+)**
+- **React-Bootstrap**
+- **CSS**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+이 프로젝트는 단순한 기능 구현을 넘어서, **실제 사용자 경험을 고려한 로직을 직접 구성해보며 React 생태계 전반을 익히는 데에 목적**이 있습니다.  
+작은 프로젝트지만, 실무에서의 로직 흐름과 상태 변경을 다뤄보며 React에 대한 이해도를 높일 수 있었습니다.
