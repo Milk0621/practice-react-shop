@@ -11,8 +11,11 @@ export let Context1 = createContext()
 
 function App() {
 
+  let watched = JSON.parse(localStorage.getItem('watched'))
   useEffect(()=>{
-    localStorage.setItem('watched', JSON.stringify( [] ))
+    !watched && (
+      localStorage.setItem('watched', JSON.stringify( [] ))
+    )
   }, [])
 
   let [shoes, setShoes] = useState(data);
@@ -29,9 +32,11 @@ function App() {
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
-            <Nav.Link onClick={()=>{navigate('/detail/1')}}>Detail</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
           </Nav>
+          {watched.map((watch, i) => (
+            <img style={{width:'5%', cursor:'pointer'}} src={`https://codingapple1.github.io/shop/shoes${shoes[watch].id + 1}.jpg`} onClick={()=>{navigate(`/detail/${shoes[watch].id}`)}} />
+          ))}
         </Container>
       </Navbar>
 
