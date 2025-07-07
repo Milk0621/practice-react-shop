@@ -6,6 +6,8 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.jsx';
 import Detail from './pages/Detail.jsx';
 import Cart from './pages/Cart.jsx';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 export let Context1 = createContext()
 
@@ -23,6 +25,10 @@ function App() {
 
   let navigate = useNavigate();
 
+  let result = useQuery('작명', ()=>axios.get('https://codingapple1.github.io/userdata.json').then(
+    (a)=> a.data
+  ))
+
   return (
     <div className="App">
 
@@ -33,6 +39,11 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
+          </Nav>
+          <Nav className='me-auto'>
+            { result.isLoading && '로딩중' }
+            { result.error && '에러' }
+            { result.data && result.data.name }
           </Nav>
           {watched.map((watch, i) => (
             <img style={{width:'5%', cursor:'pointer'}} src={`https://codingapple1.github.io/shop/shoes${shoes[watch].id + 1}.jpg`} onClick={()=>{navigate(`/detail/${shoes[watch].id}`)}} />
