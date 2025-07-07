@@ -7,7 +7,11 @@ import { addCart } from "./../store/cartSlice";
 import {Context1} from './../App.jsx';
 import { useDispatch, useSelector } from "react-redux";
 
+import {useLike} from './../hooks/like.js' 
+
 function Detail( props ) {
+
+    let [like,addLike] = useLike()
 
     let state = useSelector((state)=> state)
     let dispatch = useDispatch();
@@ -64,10 +68,9 @@ function Detail( props ) {
         <div className={"container start " + fade}>
             {
                 showAlert == true
-                ?   <div className="alert alert-warning">
+                && <div className="alert alert-warning">
                         2초이내 구매시 할인
                     </div>
-                : null
             }
             <div className="row">
                 <div className="col-md-6">
@@ -76,6 +79,7 @@ function Detail( props ) {
                 <div className="col-md-6">
                     <input type="text" placeholder="수량" onChange={(e)=>{setText(e.target.value)}}/>
                     <h4 className="pt-5">{shoe.title}</h4>
+                    {like} <span onClick={()=>{ addLike() }}>♥</span>
                     <p>{shoe.content}</p>
                     <p>{shoe.price}</p>
                     <button className="btn btn-danger" onClick={()=>{
