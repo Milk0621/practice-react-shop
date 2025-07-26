@@ -1,4 +1,4 @@
-# React Shop
+# React Shop Practice
 
 이 프로젝트는 React와 Redux Toolkit을 활용하여 **간단한 쇼핑몰 기능을 직접 구현**해보며, React의 핵심 개념과 상태 관리 흐름을 학습하기 위해 진행한 실습 프로젝트입니다.
 
